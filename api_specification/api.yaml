@@ -1,7 +1,7 @@
 openapi: "3.0.1"
 info:
   title: "${api_specification_name}"
-  description: "Standard API"
+  description: "${api_description}"
   version: "2021-06-29T12:15:37Z"
 servers:
 - url: "https://tppekr2irl.execute-api.eu-west-1.amazonaws.com/{basePath}"

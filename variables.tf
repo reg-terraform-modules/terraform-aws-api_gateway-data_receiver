@@ -17,6 +17,11 @@ variable "resource_tags" {
   type    = map(string)
 }
 
+variable "api_description" {
+  type    = string
+  default = "Standard API for data receiver"
+}
+
 variable "lambda_api_function_arn" {
   type    = string
 }
