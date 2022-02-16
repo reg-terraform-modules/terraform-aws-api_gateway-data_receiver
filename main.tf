@@ -18,6 +18,7 @@ data "template_file" "api_setup" {
   vars = {
     api_specification_name          = var.api_name
     lambda_api_function_arn         = var.lambda_api_function_arn
+    api_description = var.api_description
   }
 }
 
