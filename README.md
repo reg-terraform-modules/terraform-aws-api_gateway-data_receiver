@@ -1,4 +1,4 @@
-# Documentation
+# api_gateway-data_receiver
 
 This module generates a rest-api for invoking Lambda functions through API Gateway and passing data to Lambda in the request body.
 
