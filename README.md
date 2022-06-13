@@ -1,9 +1,8 @@
-# Resource/function: api gateway/rest api
+# Documentation
 
-## Purpose
-API pipeline setup for generating apis for reciving data in message body.
+This module generates a rest-api for invoking Lambda functions through API Gateway and passing data to Lambda in the request body.
 
-## Description
+## Module description
 Generates a default API for reciving data using POST method, and connect it to lambda for handeling. The API generates an API_KEY required for autorization, and activates logging to CloudWatch for each invokation.
 
 ## Requires
@@ -16,12 +15,11 @@ The following input variables are required:
     - the arn of the lamda function that hadles data included in the body.
 
 
-## API Usage
+## Usage
 
 The API is invoked using:
 - {invoke_url}/{stage}, where:
-    - invoke_url/stage : is a url looking like this `https://mz0erlp4cj.execute-api.eu-west-1.amazonaws.com/TEST_API_Module/input`
-
+    - invoke_url/stage : is a url looking like this `https://{api_id}.execute-api.eu-west-1.amazonaws.com/{api_name}/{stage}`
 
 - Authorization is required by sending an api key in the header:
     - x-api-key : key_value
@@ -35,7 +33,7 @@ Below is an example of how uploading a file to S3 using python code:
 import requests
 import json
 
-url = "https://mz0erlp4cj.execute-api.eu-west-1.amazonaws.com/TEST_API_Module/input"
+url = "https://{api_id}.execute-api.eu-west-1.amazonaws.com/{api_name}/{stage}"
 
 payload = json.dumps({
   "fraksjon_rute": "Papir"
