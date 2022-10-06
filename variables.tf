@@ -9,6 +9,7 @@ variable "project_name" {
 }
 
 variable "module_name" {
+  description = "Module name, for example <lambda_extract>"
   type    = string
 }
 
