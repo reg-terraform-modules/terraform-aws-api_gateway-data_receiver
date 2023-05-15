@@ -1,9 +1,3 @@
-# Common variables:
-variable "env" {
-  description = "Environment dev/prod"
-  type    = string
-}
-
 variable "project_name" {
   type    = string
 }

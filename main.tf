@@ -1,9 +1,9 @@
 locals { 
     service_name  = join("_", ["api_for",var.module_name])
-    api_full_name = join("-", [var.project_name,local.service_name,var.env])
+    api_full_name = join("-", [var.project_name,local.service_name])
     stage_name    = join("_", [var.api_name, "api"])
-    usage_plan    = join("-", [var.api_name,"usage_plan",var.env])
-    api_key       = join("-", [var.api_name,"api_key", var.env])
+    usage_plan    = join("-", [var.api_name,"usage_plan"])
+    api_key       = join("-", [var.api_name,"api_key"])
 }
 
 resource "aws_api_gateway_rest_api" "this" {

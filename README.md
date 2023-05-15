@@ -9,7 +9,6 @@ Generates a default API for reciving data using POST method, and connect it to l
 The following input variables are required:
 - project_name
 - api_name
-- env
 - resource_tags
 - lambda_api_function_arn
     - the arn of the lamda function that hadles data included in the body.
