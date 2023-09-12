@@ -23,3 +23,7 @@ variable "api_description" {
 variable "lambda_api_function_arn" {
   type    = string
 }
+
+variable "api_full_name" {
+  type    = string
+}

@@ -1,13 +1,12 @@
 locals { 
     service_name  = join("_", ["api_for",var.module_name])
-    api_full_name = join("-", [var.project_name,local.service_name])
     stage_name    = join("_", [var.api_name, "api"])
     usage_plan    = join("-", [var.api_name,"usage_plan"])
     api_key       = join("-", [var.api_name,"api_key"])
 }
 
 resource "aws_api_gateway_rest_api" "this" {
-	name = local.api_full_name
+	name = var.api_full_name
 	body = data.template_file.api_setup.rendered
   tags = var.resource_tags
 }
@@ -23,7 +22,7 @@ resource "aws_lambda_permission" "this" {
 data "template_file" "api_setup" {
   template = file("${path.module}/api_specification/api.yaml")
   vars = {
-    api_specification_name          = local.api_full_name
+    api_specification_name          = var.api_full_name
     lambda_api_function_arn         = var.lambda_api_function_arn
     api_description = var.api_description
   }
