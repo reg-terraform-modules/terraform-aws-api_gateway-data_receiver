@@ -34,7 +34,7 @@ paths:
             responseParameters:
               method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
-              application/json: $input.path('$')
+              application/json: $input.path('$.body')
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
 components:
