@@ -22,6 +22,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
+        "500":
+          description: "Internal server error"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
       security:
       - api_key: []
       x-amazon-apigateway-integration:
