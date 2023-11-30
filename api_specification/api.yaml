@@ -38,6 +38,8 @@ paths:
         type: "aws"
         httpMethod: "POST"
         uri: "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/${lambda_api_function_arn}/invocations"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
         responses:
           default:
             statusCode: "200"
@@ -45,13 +47,22 @@ paths:
               method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
               application/json: $input.path('$.body')
-        passthroughBehavior: "when_no_match"
-        timeoutInMillis: 29000
+          ".*\"statusCode\":500.*":
+            statusCode: "500"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            responseTemplates:
+              application/json: $input.path('$.errorMessage')
 components:
   schemas:
     Empty:
       title: "Empty Schema"
       type: "object"
+    Error:
+      type: "object"
+      properties:
+        message:
+          type: "string"
   securitySchemes:
     api_key:
       type: "apiKey"
