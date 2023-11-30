@@ -18,6 +18,15 @@ paths:
             Access-Control-Allow-Origin:
               schema:
                 type: "string"
+                default: "*"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+                default: "POST"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+                default: "Content-Type, x-api-key"
           content:
             application/json:
               schema:
@@ -28,6 +37,15 @@ paths:
             Access-Control-Allow-Origin:
               schema:
                 type: "string"
+                default: "*"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+                default: "POST"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+                default: "Content-Type, x-api-key"
           content:
             application/json:
               schema:
