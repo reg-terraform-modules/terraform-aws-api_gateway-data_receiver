@@ -46,13 +46,18 @@ paths:
             responseParameters:
               method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
-              application/json: $input.path('$.body')
+              application/json: {
+              'statusCode':$input.path('$.statusCode'),
+              'body':$input.path('$.body')
+              }
           ".*\"statusCode\":500.*":
             statusCode: "500"
             responseParameters:
               method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
-              application/json: $input.path('$.errorMessage')
+              application/json: {
+              'statusCode':$input.path('$.statusCode')
+              }
 components:
   schemas:
     Empty:
