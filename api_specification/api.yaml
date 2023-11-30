@@ -63,8 +63,8 @@ paths:
             statusCode: "200"
             responseParameters:
               method.response.header.Access-Control-Allow-Origin: "'*'"
-              method.response.header.Access-Control-Allow-Methods: "'POST'"
-              method.response.header.Access-Control-Allow-Headers: "'Content-Type, x-api-key'"
+              method.response.header.Access-Control-Allow-Methods: "'*'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
             responseTemplates:
               application/json: |
                 #set($inputRoot = $input.path('$'))
@@ -76,8 +76,8 @@ paths:
             statusCode: "500"
             responseParameters:
               method.response.header.Access-Control-Allow-Origin: "'*'"
-              method.response.header.Access-Control-Allow-Methods: "'POST'"
-              method.response.header.Access-Control-Allow-Headers: "'Content-Type, x-api-key'"
+              method.response.header.Access-Control-Allow-Methods: "'*'"
+              method.response.header.Access-Control-Allow-Headers: "'*'"
             responseTemplates:
              application/json: |
                 #set($inputRoot = $input.path('$'))
