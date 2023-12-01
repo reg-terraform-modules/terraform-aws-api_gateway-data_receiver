@@ -84,6 +84,36 @@ paths:
                 {
                   "statusCode": $inputRoot.statusCode
                 }
+        httpMethod: "OPTIONS"
+        uri: "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/${lambda_api_function_arn}/invocations"
+        passthroughBehavior: "when_no_match"
+        timeoutInMillis: 29000
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "''POST,GET,OPTIONS''"
+              method.response.header.Access-Control-Allow-Headers: "''Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with''"
+            responseTemplates:
+              application/json: |
+                #set($inputRoot = $input.path('$'))
+                {
+                  "statusCode": $inputRoot.statusCode,
+                  "body": $inputRoot.body
+                }
+          ".*\"statusCode\":500.*":
+            statusCode: "500"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "''POST,GET,OPTIONS''"
+              method.response.header.Access-Control-Allow-Headers: "''Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with''"
+            responseTemplates:
+             application/json: |
+                #set($inputRoot = $input.path('$'))
+                {
+                  "statusCode": $inputRoot.statusCode
+                }
 components:
   schemas:
     Empty:
