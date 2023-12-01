@@ -10,6 +10,37 @@ servers:
       default: "/{api_specification_name}"
 paths:
   /input:
+      options:
+      responses:
+        "200":
+          description: "CORS support"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+                default: "*"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+                default: "POST,GET,OPTIONS"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+                default: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with"
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'POST,GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with'"
+            responseTemplates:
+              application/json: |
+                {
+                  "statusCode": 200
+                }
     post:
       responses:
         "200":
@@ -50,41 +81,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  
       security:
       - api_key: []
       x-amazon-apigateway-integration:
         type: "aws"
         httpMethod: "POST"
-        uri: "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/${lambda_api_function_arn}/invocations"
-        passthroughBehavior: "when_no_match"
-        timeoutInMillis: 29000
-        responses:
-          default:
-            statusCode: "200"
-            responseParameters:
-              method.response.header.Access-Control-Allow-Origin: "'*'"
-              method.response.header.Access-Control-Allow-Methods: "''POST,GET,OPTIONS''"
-              method.response.header.Access-Control-Allow-Headers: "''Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with''"
-            responseTemplates:
-              application/json: |
-                #set($inputRoot = $input.path('$'))
-                {
-                  "statusCode": $inputRoot.statusCode,
-                  "body": $inputRoot.body
-                }
-          ".*\"statusCode\":500.*":
-            statusCode: "500"
-            responseParameters:
-              method.response.header.Access-Control-Allow-Origin: "'*'"
-              method.response.header.Access-Control-Allow-Methods: "''POST,GET,OPTIONS''"
-              method.response.header.Access-Control-Allow-Headers: "''Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with''"
-            responseTemplates:
-             application/json: |
-                #set($inputRoot = $input.path('$'))
-                {
-                  "statusCode": $inputRoot.statusCode
-                }
-        httpMethod: "OPTIONS"
         uri: "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/${lambda_api_function_arn}/invocations"
         passthroughBehavior: "when_no_match"
         timeoutInMillis: 29000
